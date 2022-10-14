@@ -1,5 +1,6 @@
-tsp_file = open("TSP/kroA200.tsp", "r")
-population_size = 4
+tsp_file = open("TSP/berlin52.tsp", "r")
+population_size = 5
+selection_presure = 0
 
 #Wczytanie nagłówka
 from head_reader import HeadReader
@@ -14,14 +15,23 @@ from road_length import RoadLength
 length = RoadLength.count(cities_list)
 print(length)
 
-from roadmap import RoadMap
-RoadMap.plot(cities_list)
+#vizualizacja ścieżki
+#from roadmap import RoadMap
+#RoadMap.plot(cities_list)
 
 #Inicjalizacja populacji
 from city import city
 population = city.population_initialization(city, cities_list, population_size)
 print(len(population))
+
+#Lista długości dróg zainicjalizowanego zbioru
+road_lengths = []
 for i in range(population_size):
-    print(RoadLength.count(population[i]))
+    road_lengths.append(RoadLength.count(population[i]))
+print(road_lengths)
+
+#Wybór osobników metodą ruletki
+from roulette import Roulette
+Roulette.roulette(road_lengths, selection_presure)
 
 #print(len(cities_list))
