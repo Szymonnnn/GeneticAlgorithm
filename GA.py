@@ -1,4 +1,4 @@
-tsp_file = open("TSP/berlin52.tsp", "r")
+tsp_file = open("TSP/kroA200.tsp", "r")
 population_size = 4
 
 #Wczytanie nagłówka
@@ -13,6 +13,9 @@ cities_list = CitiesReading.read(tsp_file)
 from road_length import RoadLength
 length = RoadLength.count(cities_list)
 print(length)
+
+from roadmap import RoadMap
+RoadMap.plot(cities_list)
 
 #Inicjalizacja populacji
 from city import city
