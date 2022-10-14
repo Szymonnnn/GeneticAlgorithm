@@ -15,11 +15,11 @@ class HeadReader:
         edge_weight_type = edge_weight_type.split(" ", 1)
         section = tsp_file.readline()
         print("NAME: " + name[1], end="")
-        print("TYPE: " + type[1], end="")
-        print("COMMENT: " + comment[1], end="")
-        print("DIMENSION: " + dimension[1], end="")
-        print("EDGE_WEIGHT_TYPE: " + edge_weight_type[1], end="")
-        print(section, end="")
+        #print("TYPE: " + type[1], end="")
+        #print("COMMENT: " + comment[1], end="")
+        #print("DIMENSION: " + dimension[1], end="")
+        #print("EDGE_WEIGHT_TYPE: " + edge_weight_type[1], end="")
+        #print(section, end="")
 
 if __name__ == '__main__':
     print("It is not main file")
