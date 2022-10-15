@@ -22,3 +22,9 @@ class city:
             population.append(self.list_randomization(cities_list))
         #print(population)
         return population
+    
+    def print_representation(cities_list):
+        representation = ''
+        for city in cities_list:
+            representation = representation + str(city.lp) + ' '
+        print(representation)
