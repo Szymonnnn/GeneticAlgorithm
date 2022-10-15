@@ -8,7 +8,6 @@ class Selection:
         road_lengths_inverse = []
         for i in range(len(road_lengths)):
             road_lengths_inverse.append(1/road_lengths[i])
-        #print(road_lengths_inverse)
 
         Sum = sum(road_lengths_inverse)
 
@@ -16,7 +15,6 @@ class Selection:
         roads_percentage = []
         for i in range(len(road_lengths)):
             roads_percentage.append(road_lengths_inverse[i]/Sum)
-        #print(roads_percentage)
         
         #Increasing diversity acording to selection_presure
         for i in range(selection_presure):
@@ -25,13 +23,10 @@ class Selection:
             Sum = sum(roads_percentage)
             for j in range(len(roads_percentage)):
                 roads_percentage[j] = roads_percentage[j]/Sum
-        print(roads_percentage)
-        print(sum(roads_percentage))
 
         #getting random number (0, 1) and picking correct individual/x2
         #it is possible to get same individual twice
         random_number = random.random()
-        print(random_number)
         temp_number = 0
         outcome1 = 0
         outcome2 = 0
@@ -43,7 +38,6 @@ class Selection:
                 break
         
         random_number = random.random()
-        print(random_number)
         temp_number = 0
         for i in range(len(roads_percentage)):
             temp_number += roads_percentage[i]
@@ -55,7 +49,6 @@ class Selection:
 
     def tournament(road_lengths, selection_pressure):
         contestants = random.sample(range(len(road_lengths) - 1), selection_pressure)
-        print(contestants)
         winner = contestants[0]
         for contestant in contestants[1:]:
             if road_lengths[contestant] < road_lengths[winner]:

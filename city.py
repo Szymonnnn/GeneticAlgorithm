@@ -20,7 +20,6 @@ class city:
         population = []
         for i in range(amount):
             population.append(self.list_randomization(cities_list))
-        #print(population)
         return population
     
     def print_representation(cities_list):
