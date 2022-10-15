@@ -25,10 +25,10 @@ for i in range(population_size):
     road_lengths.append(RoadLength.count(population[i]))
 
 #Wybór osobników metodą ruletki
-from selection import Roulette
-Parent1, Parent2 = Roulette.roulette(road_lengths, selection_pressure)
+from selection import Selection
+parent1, parent2 = Selection.roulette(road_lengths, selection_pressure)
 
 #wizualizacja ścieżki
 #from roadmap import RoadMap
-#RoadMap.plot(population[Parent1])
-#RoadMap.plot(population[Parent2])
+#RoadMap.plot(population[parent1])
+#RoadMap.plot(population[parent2])

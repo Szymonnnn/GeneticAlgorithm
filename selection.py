@@ -48,7 +48,7 @@ class Selection:
         return outcome1, outcome2
 
     def tournament(road_lengths, selection_pressure):
-        contestants = random.sample(range(len(road_lengths) - 1), selection_pressure)
+        contestants = random.sample(range(len(road_lengths)), selection_pressure)
         winner = contestants[0]
         for contestant in contestants[1:]:
             if road_lengths[contestant] < road_lengths[winner]:
