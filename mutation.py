@@ -13,8 +13,6 @@ def inverse(cities_list_input):
     cities_list = cities_list_input.copy()
     pos1 = random.randint(0, len(cities_list) - 1)
     pos2 = random.randint(0, len(cities_list) - 1)
-    print(pos1)
-    print(pos2)
     if pos2 < pos1:
         pos_tmp = pos1
         pos1 = pos2

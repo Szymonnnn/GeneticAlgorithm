@@ -1,6 +1,6 @@
 tsp_file = open("TSP/berlin52.tsp", "r")
 population_size = 10
-selection_presure = 3
+selection_pressure = 3
 generations_number = 10
 
 #Wczytanie nagłówka
@@ -28,8 +28,8 @@ for i in range(population_size):
 print(road_lengths)
 
 #Wybór osobników metodą ruletki
-from roulette import Roulette
-Parent1, Parent2 = Roulette.roulette(road_lengths, selection_presure)
+from selection import Roulette
+Parent1, Parent2 = Roulette.roulette(road_lengths, selection_pressure)
 print(Parent1, Parent2)
 
 #wizualizacja ścieżki

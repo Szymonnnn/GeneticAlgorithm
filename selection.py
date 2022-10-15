@@ -1,4 +1,5 @@
-class Roulette:
+import random
+class Selection:
     def __init__(self) -> None:
         pass
 
@@ -29,7 +30,6 @@ class Roulette:
 
         #getting random number (0, 1) and picking correct individual/x2
         #it is possible to get same individual twice
-        import random
         random_number = random.random()
         print(random_number)
         temp_number = 0
@@ -52,3 +52,12 @@ class Roulette:
                 break
         
         return outcome1, outcome2
+
+    def tournament(road_lengths, selection_pressure):
+        contestants = random.sample(range(len(road_lengths) - 1), selection_pressure)
+        print(contestants)
+        winner = contestants[0]
+        for contestant in contestants[1:]:
+            if road_lengths[contestant] < road_lengths[winner]:
+                winner = contestant
+        return winner
