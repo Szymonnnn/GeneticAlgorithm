@@ -1,4 +1,14 @@
 import random
+def generate_positions(length):
+    positions = random.sample(range(length), 2)
+    if positions[1] < positions[0]:
+        tmp = positions[1]
+        positions[1] = positions[0]
+        positions[0] = tmp
+    print("Positions")
+    print(positions)
+    return positions
+
 
 def order_crossover(parent1, parent2):
     def make_offspring(parent1, parent2, positions):
@@ -17,12 +27,25 @@ def order_crossover(parent1, parent2):
         #     print('WARNING: WRONG OFFSPRING')
         return offspring
         
-    positions = random.sample(range(len(parent1)), 2)
-    print("Positions")
-    print(positions)
-    if positions[1] < positions[0]:
-        tmp = positions[1]
-        positions[1] = positions[0]
-        positions[0] = tmp
+    positions = generate_positions(len(parent1))
     return make_offspring(parent1, parent2, positions), make_offspring(parent2, parent1, positions)
+
+def partially_mapped_crossover(parent1, parent2):
+    def make_offspring(parent1, parent2, positions):
+        offspring = [None] * len(parent1)
+        mappings = {}
+        for i in range(positions[0], positions[1] + 1):
+            offspring[i] = parent1[i]
+            mappings[parent1[i]] = parent2[i]
+        for i in range(len(offspring)):
+            if offspring[i] is None:
+                gene = parent2[i]
+                while gene in offspring:
+                    gene = mappings[gene]
+                offspring[i] = gene
+        if len(offspring) != len(set(offspring)) or None in offspring:
+            print('WARNING: WRONG OFFSPRING')
+        return offspring
     
+    positions = generate_positions(len(parent1))
+    return make_offspring(parent1, parent2, positions), make_offspring(parent2, parent1, positions)
