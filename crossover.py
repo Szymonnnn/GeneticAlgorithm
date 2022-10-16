@@ -5,8 +5,6 @@ def generate_positions(length):
         tmp = positions[1]
         positions[1] = positions[0]
         positions[0] = tmp
-    print("Positions")
-    print(positions)
     return positions
 
 
@@ -23,8 +21,8 @@ def order_crossover(parent1, parent2):
                         offspring[i] = parent2[j]
                         last_index = j
                         break
-        # if len(offspring) != len(set(offspring)) or None in offspring:
-        #     print('WARNING: WRONG OFFSPRING')
+        if len(offspring) != len(set(offspring)) or None in offspring:
+            print('WARNING: WRONG OFFSPRING')
         return offspring
         
     positions = generate_positions(len(parent1))
