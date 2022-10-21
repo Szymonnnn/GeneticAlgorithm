@@ -4,14 +4,14 @@ def roulette(road_lengths, selection_presure):
     #inversion of road lengths
     road_lengths_inverse = []
     for i in range(len(road_lengths)):
-        road_lengths_inverse.append(1/road_lengths[i])
+        road_lengths_inverse.append(1/road_lengths[i].cost)
 
     Sum = sum(road_lengths_inverse)
 
     #I want sum of road_percentage to be 1.0
     roads_percentage = []
     for i in range(len(road_lengths)):
-        roads_percentage.append(road_lengths_inverse[i]/Sum)
+        roads_percentage.append(road_lengths_inverse.cost/Sum)
     
     #Increasing diversity acording to selection_presure
     for i in range(selection_presure):
@@ -42,7 +42,7 @@ def roulette(road_lengths, selection_presure):
             outcome2 = i
             break
     
-    return outcome1, outcome2
+    return road_lengths[outcome1], road_lengths[outcome2]
 
 def tournament(population, selection_pressure):
     contestants = random.sample(range(len(population)), selection_pressure)

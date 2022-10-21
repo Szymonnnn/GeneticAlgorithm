@@ -11,10 +11,16 @@ class Individual:
         self.cost = length
 
     def __repr__(self):
-        return str(self.cities_list)
+        return str(self.cities_list) + "=" + str(self.cost)
 
     def __eq__(self, other):
         return self.cost == other.cost
 
     def __lt__(self, other):
         return self.cost < other.cost
+
+    def __add__(self, other):
+        return self.cost + other.cost
+    
+    def __radd__(self, other):
+        return self.__add__(other)
