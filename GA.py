@@ -16,7 +16,6 @@ mutation_probability = 0.1
 reader = Reader('TSP/berlin52.tsp')
 cities_list = reader.read_file()
 costs_matrix = RoadLength.generate_matrix(cities_list)
-print(costs_matrix)
 population = city.population_initialization(city, cities_list, population_size)
 best_cost = float('inf')
 best_solution = population[0]
@@ -24,6 +23,7 @@ best_solution = population[0]
 start = time.time()
 for iteration in range(generations_number):
     old_population = population.copy()
+    population.clear()
 
     road_lengths = []
     for i in range(population_size):
