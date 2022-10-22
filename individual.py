@@ -1,6 +1,6 @@
 class Individual:
     def __init__(self, cities_list):
-        self.cities_list = cities_list.copy()
+        self.cities_list = cities_list[::]
         self.cost = -1
     
     def evaluate(self, matrix):

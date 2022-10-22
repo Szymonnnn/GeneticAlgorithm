@@ -1,20 +1,18 @@
-from itertools import permutations
+import itertools
 from reader import Reader
-from road_length import RoadLength
-from city import city
-import time
-from roadmap import RoadMap
 import random
+from controller import Controller
+from individual import Individual
 
 reader = Reader('TSP/berlin11_modified.tsp')
 cities_list = reader.read_file()
-random.shuffle(cities_list)
+controller = Controller(cities_list)
+cities = list(range(controller.problem_size))
+random.shuffle(cities)
+best_solution = Individual(cities)
+best_solution.evaluate(controller.matrix)
 
-length = RoadLength.count(cities_list)
-best_cities_list = cities_list.copy()
-
-print(length)
-old_length = length
+print(best_solution)
 przejscie_petli = 0
 
 def factorial(x):
@@ -26,17 +24,9 @@ def factorial(x):
 _i = factorial(len(cities_list))
 #główna pętla
 import itertools
-for i in itertools.permutations(cities_list):
+for permutation in itertools.permutations(cities_list):
     przejscie_petli+=1
-    new_length = RoadLength.count(i)
-    #print(new_length)
-    if(new_length<length):
-        length = new_length
-        best_cities_list = i
-        #RoadMap.plot(best_cities_list)
-    if(przejscie_petli%100000 == 0):
-        print(_i-przejscie_petli, "left, old:", round(old_length), "best:", length)
-print(length)
-#print(best_cities_list)
-
-RoadMap.plot(best_cities_list)
+    solution = Individual(permutation)
+    if(solution < best_solution):
+        best_solution = solution
+print(solution)
