@@ -1,31 +1,28 @@
 from reader import Reader
-from road_length import RoadLength
-from city import city
-import time
-from roadmap import RoadMap
 import random
+from controller import Controller
+from individual import Individual
 
 repetitions_number = 10000000
 
-reader = Reader('TSP/berlin52.tsp')
-cities_list = reader.read_file()
+reader = Reader('TSP/berlin11_modified.tsp')
+cities = reader.read_file()
+controller = Controller(cities)
+cities_list = controller.generate_simple_list()
 
 #pierwsze mieszanie zbioru
 random.shuffle(cities_list)
-length = RoadLength.count(cities_list)
-best_cities_list = cities_list.copy()
+solution = Individual(cities_list)
+solution.evaluate(controller.matrix)
+best_solution = solution
 
 #główna pętla
 for i in range(repetitions_number):
-    old_cities_list = cities_list.copy()
     random.shuffle(cities_list)
-    new_length = RoadLength.count(cities_list)
-    if(new_length<length):
-        length = new_length
-        best_cities_list = cities_list.copy()
-        print(i, length)
+    solution = Individual(cities_list)
+    solution.evaluate(controller.matrix)
+    if(solution < best_solution):
+        best_solution = solution
+        print(i, solution)
 
-print(length)
-#print(best_cities_list)
-
-RoadMap.plot(best_cities_list)
+print("Best solution: " + str(best_solution))

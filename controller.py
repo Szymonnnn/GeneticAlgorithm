@@ -36,3 +36,6 @@ class Controller:
                 row.append(cost)
             matrix.append(row)
         self.matrix = matrix
+
+    def generate_simple_list(self):
+        return list(range(self.problem_size))
