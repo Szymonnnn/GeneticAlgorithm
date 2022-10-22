@@ -1,5 +1,5 @@
 from reader import Reader
-import controller
+from controller import Controller
 import selection
 import crossover
 from individual import Individual
@@ -12,10 +12,10 @@ generations_number = 1000
 crossing_probability = 0.5
 mutation_probability = 0.1
 
-reader = Reader('TSP/berlin11_modified.tsp')
+reader = Reader('TSP/berlin52.tsp')
 cities_list = reader.read_file()
-controller = controller.Controller(cities_list)
-population = controller.initialize_population(population_size)
+controller = Controller(cities_list)
+population = controller.initialize_population_greedy(population_size)
 best_solution = min(population)
 
 for iteration in range(generations_number):
