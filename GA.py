@@ -1,11 +1,10 @@
 from reader import Reader
-from road_length import RoadLength
-from city import city
-from selection import Selection
+import controller
+import selection
 import crossover
+from individual import Individual
 import random
 import mutation
-import time
 
 population_size = 100
 selection_pressure = 3
@@ -13,45 +12,33 @@ generations_number = 1000
 crossing_probability = 0.5
 mutation_probability = 0.1
 
-reader = Reader('TSP/berlin52.tsp')
+reader = Reader('TSP/berlin11_modified.tsp')
 cities_list = reader.read_file()
-costs_matrix = RoadLength.generate_matrix(cities_list)
-population = city.population_initialization(city, cities_list, population_size)
-best_cost = float('inf')
-best_solution = population[0]
+controller = controller.Controller(cities_list)
+population = controller.initialize_population(population_size)
+best_solution = min(population)
 
-start = time.time()
 for iteration in range(generations_number):
     old_population = population.copy()
     population.clear()
-
-    road_lengths = []
-    for i in range(population_size):
-        road_lengths.append(RoadLength.count_from_matrix(old_population[i], costs_matrix))
-
-    tmp_best_cost = min(road_lengths)
-    if tmp_best_cost < best_cost:
-        best_cost = tmp_best_cost
-        best_solution = old_population[min(range(len(road_lengths)), key=road_lengths.__getitem__)]
-
     for i in range(population_size//2):
-        parent1_id = Selection.tournament(road_lengths, selection_pressure)
-        parent2_id = Selection.tournament(road_lengths, selection_pressure)
-
+        parent1 = selection.tournament(old_population, selection_pressure)
+        parent2 = selection.tournament(old_population, selection_pressure)
         if random.random() < crossing_probability:
-            offspring1, offspring2 = crossover.order_crossover(old_population[parent1_id], old_population[parent2_id])
+            chromosome1, chromosome2 = crossover.order_crossover(parent1.cities_list, parent2.cities_list)
         else:
-            offspring1 = old_population[parent1_id]
-            offspring2 = old_population[parent2_id]
-
+            chromosome1 = parent1.cities_list
+            chromosome2 = parent2.cities_list
         if random.random() < mutation_probability:
-            offspring1 = mutation.inverse(offspring1)
+            chromosome1 = mutation.swap(chromosome1)
         if random.random() < mutation_probability:
-            offpsring2 = mutation.inverse(offspring2)
+            chromosome2 = mutation.swap(chromosome2)
+        population.append(Individual(chromosome1))
+        population[-1].evaluate(controller.matrix)
+        population.append(Individual(chromosome2))
+        population[-1].evaluate(controller.matrix)
+    tmp_best_solution = min(population)
+    if tmp_best_solution < best_solution:
+        best_solution = tmp_best_solution
 
-        population.append(offspring1)
-        population.append(offspring2)
-end = time.time()
-print('Czas wykonania' + str(end - start))
-print(city.print_representation(best_solution))
-print('Znaleziony koszt: ' + str(best_cost))
+print('Znaleziono rozwiazanie: ' + str(best_solution))
