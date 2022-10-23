@@ -44,8 +44,9 @@ def roulette(road_lengths, selection_presure):
     
     return road_lengths[outcome1], road_lengths[outcome2]
 
-def tournament(population, selection_pressure):
+def tournament(population, selection_pressure, logger):
     contestants = random.sample(range(len(population)), selection_pressure)
+    logger.log("Zawodnicy: " + str(contestants))
     winner = contestants[0]
     for contestant in contestants[1:]:
         if population[contestant] < population[winner]:

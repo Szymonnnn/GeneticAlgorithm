@@ -8,7 +8,7 @@ def generate_positions(length):
     return positions
 
 
-def order_crossover(parent1, parent2):
+def order_crossover(parent1, parent2, logger):
     def make_offspring(parent1, parent2, positions):
         offspring = [None] * len(parent1)
         for i in range(positions[0], positions[1] + 1):
@@ -23,9 +23,11 @@ def order_crossover(parent1, parent2):
                         break
         if len(offspring) != len(set(offspring)) or None in offspring:
             print('WARNING: WRONG OFFSPRING')
+        logger.log("Offspring: " + str(offspring))
         return offspring
         
     positions = generate_positions(len(parent1))
+    logger.log("Pozycje: " + str(positions))
     return make_offspring(parent1, parent2, positions), make_offspring(parent2, parent1, positions)
 
 def partially_mapped_crossover(parent1, parent2):

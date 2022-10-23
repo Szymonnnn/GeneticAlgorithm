@@ -1,12 +1,14 @@
 import random
 
-def swap(cities_list_input):
+def swap(cities_list_input, logger):
     cities_list= cities_list_input.copy()
     pos1 = random.randint(0, len(cities_list) - 1)
     pos2 = random.randint(0, len(cities_list) - 1)
+    logger.log("Pozycje" + str(pos1) + ", " + str(pos2))
     tmp = cities_list[pos1]
     cities_list[pos1] = cities_list[pos2]
     cities_list[pos2] = tmp
+    logger.log("Wynik " + str(cities_list))
     return cities_list
 
 def inverse(cities_list_input):
