@@ -15,15 +15,7 @@ best_solution.evaluate(controller.matrix)
 print(best_solution)
 przejscie_petli = 0
 
-def factorial(x):
-    fact = 1
-    for i in range(1,x+1):
-        fact = fact * i
-    return fact
-
-_i = factorial(len(cities_list))
 #główna pętla
-import itertools
 for permutation in itertools.permutations(cities_list):
     przejscie_petli+=1
     solution = Individual(permutation)
