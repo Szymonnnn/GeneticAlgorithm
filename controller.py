@@ -23,6 +23,7 @@ class Controller:
             cities_list.append(next_city)
             length += min_len
             cities_to_visit.remove(next_city)
+        length += self.matrix[cities_list[-1]][0]
         solution = Individual(cities_list)
         solution.cost = length
         return solution
