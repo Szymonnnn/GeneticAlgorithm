@@ -29,8 +29,15 @@ class Controller:
 
     def initialize_population_greedy(self, amount):
         population = []
-        for i in range(amount):
-            population.append(self.greedy_from_city(i%self.problem_size))
+        for i in range(self.problem_size):
+            population.append(self.greedy_from_city(i))
+        if len(population) < amount:
+            cities_list = list(range(self.problem_size))
+        while len(population) < amount:
+            random.shuffle(cities_list)
+            solution = Individual(cities_list)
+            solution.evaluate(self.matrix)
+            population.append(solution)
         return population
         
     def randomize_list(cities_list):
