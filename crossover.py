@@ -21,8 +21,6 @@ def order_crossover(parent1, parent2):
                         offspring[i] = parent2[j]
                         last_index = j
                         break
-        if len(offspring) != len(set(offspring)) or None in offspring:
-            print('WARNING: WRONG OFFSPRING')
         return offspring
         
     positions = generate_positions(len(parent1))
@@ -41,8 +39,6 @@ def partially_mapped_crossover(parent1, parent2):
                 while gene in offspring:
                     gene = mappings[gene]
                 offspring[i] = gene
-        if len(offspring) != len(set(offspring)) or None in offspring:
-            print('WARNING: WRONG OFFSPRING')
         return offspring
     
     positions = generate_positions(len(parent1))
