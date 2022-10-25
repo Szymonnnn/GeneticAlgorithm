@@ -6,7 +6,7 @@ from individual import Individual
 import random
 import mutation
 
-population_size = 100
+population_size = 1000
 selection_pressure = 3
 generations_number = 1000
 crossing_probability = 0.5
